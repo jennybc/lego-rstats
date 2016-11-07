@@ -1,0 +1,43 @@
+---
+output:
+  github_document:
+    toc: true
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# R and Lego
+
+Repo holds photos that depict R data structures and operations via Lego.
+
+These images are released under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+
+# Gallery of the photos
+
+Clickable gallery, which is created from a small chunk of R code in an executable R Markdown [`README.Rmd`](README.Rmd). [This gist](https://gist.github.com/jennybc/0239f65633e09df7e5f4) shows similar syntax but with markdown image links, instead of html.
+
+```{r make-smaller-pngs, include = FALSE}
+library(purrr)
+fig_files <- list.files(pattern = "\\.jpg$")
+smaller_files <- list.files(pattern = "smaller")
+fig_files <- setdiff(fig_files, smaller_files)
+fig_files_smaller <- gsub("(^.*)(\\.jpg$)", "\\1-smaller\\2", fig_files)
+
+## make sure all PNGs exist in a 'smaller' version
+fig_files_needed <- !file.exists(fig_files_smaller)
+if (any(fig_files_needed)) {
+  library(magick)
+  figs <- map(fig_files[fig_files_needed], image_read)
+  figs %>% 
+    map(image_scale, geometry = "400") %>% 
+    map2(fig_files_smaller[fig_files_needed], image_write)
+}
+fig_files_smaller <- gsub("(^.*)(\\.jpg$)", "\\1-smaller\\2", fig_files)  
+```
+
+```{r make-gallery, results = "asis", echo = FALSE}
+## the real business is here
+tags <- sprintf("<a href=\"%s\"><img src=\"%s\"></a>",
+                fig_files, fig_files_smaller)
+cat(tags)
+```
