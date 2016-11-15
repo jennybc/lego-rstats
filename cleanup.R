@@ -1,18 +1,22 @@
+## scratch pad for code to rename files exported by photos
 library(stringr)
+library(tidyverse)
 
-fig_files <- list.files(pattern = "\\.jpg$")
-smaller_files <- list.files(pattern = "smaller")
-fig_files <- setdiff(fig_files, smaller_files)
-fig_files
+## rename first wave to have 3 digit number vs 2
+fig_files <- list.files(pattern = "lego-rstats.*\\.jpg$")
+file.rename(fig_files, str_replace(fig_files, "(\\d{2})", "0\\1"))
 
-wave1 <- str_subset(fig_files, "lego-data-structures")
-wave2plus <- str_subset(fig_files, "lego-rstats")
-wave3 <- str_subset(wave2plus, "\\(")
-wave2 <- setdiff(wave2plus, wave3)
-wave2_nums <- as.integer(str_extract(wave2, "\\d+"))
-wave2 <- wave2[order(wave2_nums)]
+## remove prematurely-made "smaller" files
+smaller_files <- list.files(pattern = "lego2.*smaller")
+file.remove(smaller_files)
 
-before <- c(wave1, wave2, wave3)
-n <- length(before)
-after <- sprintf("lego-rstats_%02d.jpg", seq_along(before))
-file.rename(from = before, to = after)
+## main rename for second wave
+df <- tibble(
+  new_files = list.files(pattern = "lego2"),
+  number = as.integer(str_replace(new_files, "lego2 - (\\d{1,2}).jpg", "\\1")),
+  padded =  sprintf("%03d", number + 100),
+  new_name = str_c("lego-rstats_", padded, ".jpg")
+)
+df %>%
+  select(from = new_files, to = new_name) %>%
+  pmap(file.rename)

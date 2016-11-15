@@ -49,4 +49,16 @@ Photos added in waves and file name/number is roughly chronological. At least I 
   * 2016-10-23 just playing around, 1st two photos of the large plate
   * 2016-11-06 first big wave
   * 2016-11-06 redo pants photo due to 2 vs 3 peg gap (wtf?)
+  * 2016-11-15 have learned alot from first wave
+    - BOUGHT A TRIPOD
+    - retake photos of nested data frame, since david smith discovered a missing lego :scream:
+    - made photos more suitable for map, map2, pmap, map_df
+    - illustrate NAs in atomic vector
+    - photograph atomic vectors on contrasting construction paper so keynote alpha transparency works
+  * TO DOs:
+    - retake antenna photo
+    - map_SOMETHING when elements aren't valid ... safely?
+    - horizontal hair-only (like the weapons)
+    - columnar white background bald minis, hair, minis w/ hair
+    - each mini, fully decked out, alone, ready for alpha transparency
   
