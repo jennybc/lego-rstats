@@ -18,7 +18,7 @@ Clickable gallery, which is created from a small chunk of R code in an executabl
 
 ```{r make-smaller-pngs, include = FALSE}
 library(purrr)
-fig_files <- list.files(pattern = "\\.jpg$")
+fig_files <- list.files(pattern = "lego-rstats.*\\.jpg$")
 smaller_files <- list.files(pattern = "smaller")
 fig_files <- setdiff(fig_files, smaller_files)
 fig_files_smaller <- gsub("(^.*)(\\.jpg$)", "\\1-smaller\\2", fig_files)
@@ -41,3 +41,12 @@ tags <- sprintf("<a href=\"%s\"><img src=\"%s\"></a>",
                 fig_files, fig_files_smaller)
 cat(tags)
 ```
+
+### Notes
+
+Photos added in waves and file name/number is roughly chronological. At least I think so.
+
+  * 2016-10-23 just playing around, 1st two photos of the large plate
+  * 2016-11-06 first big wave
+  * 2016-11-06 redo pants photo due to 2 vs 3 peg gap (wtf?)
+  
