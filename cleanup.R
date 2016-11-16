@@ -17,8 +17,8 @@ library(tidyverse)
 ## main rename for third wave
 df <- tibble(
   new_files = list.files(pattern = "lego3"),
-  number = as.integer(str_replace(new_files, "lego2 - (\\d{1,2}).jpg", "\\1")),
-  padded =  sprintf("%03d", number + 100),
+  number = as.integer(str_replace(new_files, "lego3 - (\\d{1,2}).jpg", "\\1")),
+  padded =  sprintf("%03d", number + 150),
   new_name = str_c("lego-rstats_", padded, ".jpg")
 )
 df %>%
